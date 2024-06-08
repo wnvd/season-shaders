@@ -16,7 +16,7 @@ async function preload() {
         { alias: 'cloud3', src: '/clouds/cloud3.png' },
         { alias: 'cloud4', src: '/clouds/cloud4.png' },
         { alias: 'cloud5', src: '/clouds/cloud5.png' },
-        { alias: 'displacement', src: './public/Perlin-4.png' },
+        { alias: 'displacement', src: '/Perlin-4.png' },
 
     ];
 
@@ -36,7 +36,7 @@ function addClouds(app, clouds) {
 
         cloud.anchor.set(0.5);
 
-        cloud.scale.set(0 + Math.random() * 0.05);
+        cloud.scale.set(0 + Math.random() * 0.08);
 
         cloud.x = Math.random() * app.screen.width;
         cloud.y = Math.random() * app.screen.height;
