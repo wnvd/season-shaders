@@ -36,7 +36,7 @@ function addClouds(app, clouds) {
 
         cloud.anchor.set(0.5);
 
-        cloud.scale.set(0 + Math.random() * 0.08);
+        cloud.scale.set(Math.random() * (0.15 - 0.08 + 0.08) + 0.08);
 
         cloud.x = Math.random() * app.screen.width;
         cloud.y = Math.random() * app.screen.height;
