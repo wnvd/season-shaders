@@ -38,7 +38,7 @@ function addSnow(app, snowflakes) {
 
         snow.scale.set(2 + Math.random() * 1);
 
-        snow.x = 1 + Math.random() * app.screen.width;
+        snow.x = 6 + Math.random() * app.screen.width;
         snow.y = 1 + Math.random() * app.screen.height;
 
 
@@ -54,7 +54,7 @@ function addDispalcementEffect(app) {
 
     const filter = new DisplacementFilter({
         sprite,
-        scale: 20,
+        scale: 15,
         width: app.screen.width,
         height: app.screen.height,
     });
@@ -69,12 +69,13 @@ async function sceneSnowy() {
     addSnow(app, snowflakes);
     addDispalcementEffect(app);
 
-    app.ticker.add(() => {
+    app.ticker.add((time) => {
 
         for (let i = 0; i < snowflakes.length; i++) {
 
             const snowflake = snowflakes[i];
-            snowflake.y += Math.sin(1);
+            snowflake.y += Math.sin(1) * time.deltaTime;
+            snowflake.x += -Math.sin(3) + Math.cos(1) * time.deltaTime;
 
             if (snowflake.y - snowflake.height / 4 > app.screen.height) {
                 snowflake.y = -snowflake.height / 2;
