@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "simplex-noise": "^4.0.1",
     "vite": "^5.2.13"
   }
 }

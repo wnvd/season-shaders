@@ -5,7 +5,7 @@ const app = new Application();
 const snowflakes = [];
 
 async function setup() {
-    await app.init({ resizeTo: window, background: '#44667f' })
+    await app.init({ resizeTo: window, background: '#000000' })
     document.body.appendChild(app.canvas);
 }
 
@@ -28,7 +28,7 @@ function addSnow(app, snowflakes) {
     const snowCounter = new Container();
     app.stage.addChild(snowCounter);
 
-    const totalSnow = 25;
+    const totalSnow = 300;
     const snowAssests = ['snow_light', 'snow_medium'];
     for (let i = 0; i < totalSnow; i++) {
         const snowAssest = snowAssests[i % snowAssests.length];
@@ -36,7 +36,7 @@ function addSnow(app, snowflakes) {
 
         snow.anchor.set(0.5);
 
-        snow.scale.set(2 + Math.random() * 1);
+        snow.scale.set(3.5 + Math.random() * 1);
 
         snow.x = 6 + Math.random() * app.screen.width;
         snow.y = 1 + Math.random() * app.screen.height;
@@ -69,19 +69,21 @@ async function sceneSnowy() {
     addSnow(app, snowflakes);
     addDispalcementEffect(app);
 
+    const frequency = 0.1;
+    const amplitude = 0.1;
+
     app.ticker.add((time) => {
 
         for (let i = 0; i < snowflakes.length; i++) {
-
             const snowflake = snowflakes[i];
-            snowflake.y += Math.sin(1) * time.deltaTime;
-            snowflake.x += -Math.sin(3) + Math.cos(1) * time.deltaTime;
+            snowflake.y += Math.sin(0.5) * time.deltaTime;
 
-            if (snowflake.y - snowflake.height / 4 > app.screen.height) {
+            snowflake.x += Math.sin(frequency * snowflake.y) * amplitude * time.deltaTime;
+
+            if (snowflake.y - snowflake.height / 2 > app.screen.height) {
                 snowflake.y = -snowflake.height / 2;
-                snowflake.x = Math.random() * app.screen.height;
+                snowflake.x = Math.random() * app.screen.width;
             }
-
         }
     })
 }
