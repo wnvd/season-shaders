@@ -36,7 +36,7 @@ function addSnow(app, snowflakes) {
 
         snow.anchor.set(0.5);
 
-        snow.scale.set(3.5 + Math.random() * 1);
+        snow.scale.set(1.5 + Math.random() * 1);
 
         snow.x = 6 + Math.random() * app.screen.width;
         snow.y = 1 + Math.random() * app.screen.height;
@@ -69,8 +69,8 @@ async function sceneSnowy() {
     addSnow(app, snowflakes);
     addDispalcementEffect(app);
 
-    const frequency = 0.1;
-    const amplitude = 0.1;
+    const frequency = 0.0001;
+    const amplitude = 2;
 
     app.ticker.add((time) => {
 
