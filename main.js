@@ -1,11 +1,13 @@
-import { Application, Container, Sprite, Assets, noiseFrag, DisplacementFilter } from "./pixi.min.js";
+import { Application, Container, Sprite, Assets, DisplacementFilter, Graphics, FillGradient } from "./pixi.min.js";
 
 const app = new Application();
+const colorStops = [0x5996d1, 0x2758a2, 0xb2e74];
+const gradientFill = new FillGradient(0, 1500, 0, 0);
 
 const snowflakes = [];
 
 async function setup() {
-    await app.init({ resizeTo: window, background: '#000000' })
+    await app.init({ resizeTo: window, background: '0xffffff' })
     document.body.appendChild(app.canvas);
 }
 
@@ -22,6 +24,18 @@ async function preload() {
     ];
 
     await Assets.load(assests);
+}
+
+function addGradient() {
+
+    colorStops.forEach((number, index) => {
+        const ratio = index / colorStops.length;
+        gradientFill.addColorStop(ratio, number);
+    });
+
+    const backdrop = new Graphics().rect(0, 0, app.screen.width, app.screen.height, 0).fill({ fill: gradientFill });
+
+    app.stage.addChild(backdrop);
 }
 
 function addSnow(app, snowflakes) {
@@ -66,6 +80,7 @@ function addDispalcementEffect(app) {
 async function sceneSnowy() {
     await setup();
     await preload();
+    addGradient();
     addSnow(app, snowflakes);
     addDispalcementEffect(app);
 
